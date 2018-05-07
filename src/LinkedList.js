@@ -184,18 +184,20 @@ class LinkedList {
     let newNode = new Node();
     newNode.value = value;
 
-    if (this._tail !== null) {
+    if (this._tail === null) {
+      // Append new node to an empty list.
+      this._tail = newNode;
+      this._head = newNode;
+      this._length = 1;
+    }
+    else {
+      // Append new node to tail of list.
       this._tail.next = newNode;
       newNode.previous = this._tail;
       newNode.next = null;
       this._tail = newNode;
+      this._length++;
     }
-    else {
-      this._tail = newNode;
-      this._head = newNode;
-    }
-
-    this._length++;
 
     return newNode;
   }
@@ -248,10 +250,12 @@ class LinkedList {
    */
   shift() {
     let result = null;
-    if (this._length < 1) {
+    if (this._head === null) {
+      // Empty list.
       return result;
     }
     else if (this._length === 1) {
+      // 1 node in the list.
       result = this._head;
       result.next = null;
       this._head = null;
@@ -259,6 +263,7 @@ class LinkedList {
       this._length--;
     }
     else {
+      // 2 or more nodes in list.
       result = this._head;
       this._head = result.next;
       this._head.previous = null;
@@ -275,19 +280,19 @@ class LinkedList {
    * @return {type}       Returns the newly inserted item.
    */
   unshift(value) {
-    let result = null;
-    if (this._length < 1) {
-      result = this.push(value);
+    let newNode = null;
+    if (this.length === 0) {
+      newNode = this.push(value);
     }
     else {
-      result = new Node();
-      result.value = value;
-      result.next = this._head;
-      this._head = result;
+      newNode = new Node();
+      newNode.value = value;
+      newNode.next = this._head;
+      this._head = newNode;
       this._length++;
     }
 
-    return result;
+    return newNode;
   }
 
   /**
