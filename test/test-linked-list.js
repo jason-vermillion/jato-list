@@ -241,7 +241,7 @@ describe('LinkedList', function() {
       assert.equal(list.toString(), 'LinkedList: [item 1, item 2]');
     });
 
-    it('should addAfter() 10 items to an empty list', function() {
+    it('should addAfter() 10 items to tail of list', function() {
       let list = new LinkedList();
       let n = list.push(0);
       for (let i = 1; i < 10; i++) {
@@ -251,8 +251,34 @@ describe('LinkedList', function() {
       assert.equal(list.length, 10);
       assert.equal(list.head.value, 0);
       assert.equal(list.tail.value, 9);
-      assert.equal(list.toString(), 'LinkedList: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]');
+      assert.equal(list.toString(), LIST_TEN);
     });
+
+    it('should addAfter() 10 items to head of list', function() {
+      let list = new LinkedList();
+      let inserted = list.push(0);
+      for (let i = 9; i > 0; i--) {
+        inserted = list.addAfter(list.head, i);
+      }
+
+      assert.equal(inserted.value, 1, 'inserted.value');
+      assert.equal(list.length, 10);
+      assert.equal(list.head.value, 0);
+      assert.equal(list.tail.value, 9);
+      assert.equal(list.toString(), LIST_TEN);
+    });
+
+    it('should addAfter() 1 item to the middle of a list.', function() {
+      let list = LinkedList.from([0, 1, 3, 4]);
+      let inserted = list.addAfter(list.head.next, 2);
+
+      assert.equal(inserted.value, 2, 'inserted.value');
+      assert.equal(list.length, 5);
+      assert.equal(list.head.value, 0);
+      assert.equal(list.tail.value, 4);
+      assert.equal(list.toString(), LIST_FIVE);
+    });
+
   });
 
   describe('#addBefore()', function() {
@@ -265,6 +291,17 @@ describe('LinkedList', function() {
       assert.equal(list.head.value, 0, 'list.head.value');
       assert.equal(list.tail.value, 1, 'list.tail.value');
       assert.equal(list.toString(), LIST_TWO, 'list.toString()');
+    });
+
+    it('should addBefore() one item to before the tail of 4 item list.', function() {
+      let list = LinkedList.from([0, 1, 2, 4]);
+      let inserted = list.addBefore(list.tail, 3);
+
+      assert.equal(inserted.value, 3, 'inserted.value');
+      assert.equal(list.length, 5, 'list.length');
+      assert.equal(list.head.value, 0, 'list.head.value');
+      assert.equal(list.tail.value, 4, 'list.tail.value');
+      assert.equal(list.toString(), LIST_FIVE, 'list.toString()');
     });
 
     it('should addBefore() 10 items to an empty list.', function() {

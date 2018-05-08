@@ -87,6 +87,11 @@ class LinkedList {
     newNode.value = value;
     newNode.previous = node.previous;
     newNode.next = node;
+
+    if (node.previous !== null) {
+      node.previous.next = newNode;
+    }
+    
     node.previous = newNode;
 
     if (newNode.previous === null) {

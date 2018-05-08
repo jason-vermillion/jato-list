@@ -25,14 +25,13 @@ list.push(1);
 list.push(2);
 
 // LinkedList: [0, 1, 2]
-console.log(list.toString())
+console.log(list.toString());
 
 // Remove items with remove(), pop(), or shift().
 // Remove the last item of the list using pop().
 list.pop();
-console.log(list.toString())
+console.log(list.toString());
 // LinkedList: [0, 1]
-
 
 // First and last item values in the list
 console.log(list.head.value); // 0
@@ -75,6 +74,7 @@ Create a new empty LinkedList instance.
 ```javascript
 const LinkedList = require('jato-list');
 
+// Create a new LinkedList instance.
 let list = new LinkedList();
 
 // Append 3 items to the end of the list.
@@ -83,16 +83,18 @@ list.push(1);
 list.push(2);
 
 // LinkedList: [0, 1, 2]
-console.log(list.toString())
+console.log(list.toString());
+
 // Number of nodes in the list.
 console.log(list.length); // 3
 
-// First item in the list
+// First item in the list.
 console.log(list.head.value); // 0
-// Last item in the list
+
+// Last item in the list.
 console.log(list.tail.value); // 2
 
-// Second item in the list
+// Second item in the list.
 console.log(list.head.next.value); // 1
 ```
 
@@ -104,16 +106,18 @@ const LinkedList = require('jato-list');
 
 // Create a new LinkedList with 3 nodes.
 let list = LinkedList.from([0, 1, 2]);
-console.log(list.toString())
+
+console.log(list.toString());
 // LinkedList: [0, 1, 2]
 
 // Add a new node with the value of 999 after the first element in the list.
 let item = list.addAfter(list.head, 999);
-console.log(list.toString())
-// LinkedList: [0, 999, 1, 2]
 
 console.log(item.value);
 // 999
+
+console.log(list.toString());
+// LinkedList: [0, 999, 1, 2]
 ```
 
 ## addBefore()
@@ -124,12 +128,14 @@ const LinkedList = require('jato-list');
 
 // Create a new LinkedList with 3 nodes.
 let list = LinkedList.from([0, 1, 2]);
-console.log(list.toString())
+
+console.log(list.toString());
 // LinkedList: [0, 1, 2]
 
 // Add a new node with the value of 999 before the last element in the list.
 let item = list.addBefore(list.tail, 999);
-console.log(list.toString())
+
+console.log(list.toString());
 // LinkedList: [0, 1, 999, 2]
 
 console.log(item.value);
@@ -144,24 +150,27 @@ const LinkedList = require('jato-list');
 
 // Create a new LinkedList with 3 nodes.
 let list = LinkedList.from([0, 1, 2]);
-console.log(list.toString())
+
+console.log(list.toString());
 // LinkedList: [0, 1, 2]
 
 // Remove all of the nodes from the list.
 list.clear();
-console.log(list.toString())
+
+console.log(list.toString());
 // LinkedList: []
 ```
 
 ## from()
-Create a new LinkedList from an array like list of values.
+Create a new LinkedList instance from an array of values.
 
 ```javascript
 const LinkedList = require('jato-list');
 
-// Create a new LinkedList instance from an Array.
+// Create a new LinkedList instance from an Array like object.
 let list = LinkedList.from([0, 1, 2, 3, 4]);
-console.log(list.toString())
+
+console.log(list.toString());
 // LinkedList: [0, 1, 2, 3, 4]
 ```
 ## head
@@ -172,38 +181,43 @@ const LinkedList = require('jato-list');
 
 // Create a new LinkedList instance from an Array of values.
 let list = LinkedList.from([40, 41, 42, 43]);
-console.log(list.toString())
+
+console.log(list.toString());
 // LinkedList: [40, 41, 42, 43]
 
-// The head property points to the first node in the list.
-// print the value of the first item in the list.
+// Print the value of the first item in the list using the head property.
 console.log(list.head.value);
 // Expected output: 40
 
 console.log(list.head.next.value);
 // Expected output: 41
+
+// Print the value of the last item in the list using the tail property.
+console.log(list.tail.value);
+// Expected output: 43
 ```
 
 ## of()
-Create a new LinkedList from a variable number of parameter arguments.
+Create a new LinkedList instance from a variable number of parameter arguments.
 
 ```javascript
 const LinkedList = require('jato-list');
 
 let list;
 
-// Create a new LinkedList instance from a varialbe number of arguments.
+// Create a new LinkedList instance from a variable number of arguments.
 list = LinkedList.of('Apple', 'Pear', 'Kiwi');
-console.log(list.toString())
+console.log(list.toString());
 // LinkedList: [Apple, Pear, Kiwi]
 
+// One item list.
 list = LinkedList.of(1987);
-console.log(list.toString())
+console.log(list.toString());
 // LinkedList: [1987]
 
-// empty list
+// Empty list
 list = LinkedList.of();
-console.log(list.toString())
+console.log(list.toString());
 // LinkedList: []
 ```
 
@@ -213,20 +227,20 @@ Remove the last node from the list.
 ```javascript
 const LinkedList = require('jato-list');
 
-let item = null;
+let item;
 let list = LinkedList.from(['a', 'b', 'c', 'd', 'e']);
-console.log(list.toString())
+console.log(list.toString());
 // LinkedList: [a, b, c, d, e]
 
-// pop() removes the last item from the list.
-item = list.pop('step 1');
+// pop() removes the last item "e" from the list.
+item = list.pop();
 console.log(list.toString());
 // LinkedList: [a, b, c, d]
 
-// Remove another. The pop() method returns the removed item.
+// Remove "d" from the end of the list.  Pop() returns the removed node.
 item = list.pop();
 console.log(item.value);
-// expected output: d
+// Expected output: d
 
 console.log(list.toString());
 // LinkedList: [a, b, c]
@@ -263,20 +277,23 @@ const LinkedList = require('jato-list');
 
 let item = null;
 let list = LinkedList.from([1, 2, 3, 4]);
+
+console.log(list.toString());
 // LinkedList: [1, 2, 3, 4]
 
-// Reference the second item
+// Reference the second item in the list.
 item = list.head.next;
 
-// Remove the second item
+// Remove the second item.
 let removed = list.remove(item);
-console.log(list.toString())
+
+console.log(list.toString());
 // LinkedList: [1, 3, 4]
 
 console.log(removed.value);
 // Expected output: 2
-
 ```
+
 ## shift()
 Remove the first node from the beginning of the list.
 
@@ -284,11 +301,12 @@ Remove the first node from the beginning of the list.
 const LinkedList = require('jato-list');
 
 let list = LinkedList.from([1, 2, 3, 4]);
+console.log(list.toString());
 // LinkedList: [1, 2, 3, 4]
 
 // Remove the first item from the list
 let removed = list.shift();
-console.log(list.toString())
+console.log(list.toString());
 // LinkedList: [2, 3, 4]
 
 console.log(removed.value);
@@ -302,11 +320,12 @@ Add a new node to the beginning of the list.
 const LinkedList = require('jato-list');
 
 let list = LinkedList.from([1, 2, 3]);
+console.log(list.toString());
 // LinkedList: [1, 2, 3]
 
 // Insert an item to the front of the list.
 let added = list.unshift(99);
-console.log(list.toString())
+console.log(list.toString());
 // LinkedList: [99, 1, 2, 3]
 
 console.log(added.value);
@@ -321,7 +340,7 @@ const LinkedList = require('jato-list');
 
 // Create a new LinkedList instance from an Array of values.
 let list = LinkedList.from([40, 41, 42, 43]);
-console.log(list.toString())
+console.log(list.toString());
 // LinkedList: [40, 41, 42, 43]
 
 // The tail property points to the last node in the list.
@@ -338,10 +357,11 @@ Get the string representation of the list.
 ```javascript
 const LinkedList = require('jato-list');
 
-let list = LinkedList.from([40, 41, 42, 43]);
+let list = LinkedList.from(['green', 'red', 'yellow', 'blue', 'pink']);
+
 // Print a string representation of the list.
-console.log(list.toString())
-// LinkedList: [40, 41, 42, 43]
+console.log(list.toString());
+// LinkedList: [green, red, yellow, blue, pink]
 ```
 
 ## Symbol.iterator
